@@ -6,9 +6,9 @@ allows for custom words triggers for shocking such as `(word) (shock value) (dur
 
 miscellaneous features:
 
-- status <type> <status> (type: 1 - Game, 2 - Streaming, 3 - Listening, 4 - Watching)
-- avatar <user>
-- banner <user>
+- status <type> <status> (type: 1 - Game, 2 - Streaming, 3 - Listening, 4 - Watching) 
+- avatar <user/id> 
+- banner <user/id>
 
 > ### ⚠️ **Warning:** Selfbots are against Discord's TOS but bans are likely unless you spam Discord's API or openly show it in public discord servers. I am not responsible for any issues/bans.
 
