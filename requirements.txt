@@ -1,0 +1,9 @@
+
+customtkinter==5.2.2
+discord-protos==0.0.2
+discord.py-self==2.0.0
+pishock==1.1.0
+psutil==6.1.0
+python-dotenv==1.0.1
+tk==0.1.0
+
