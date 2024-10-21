@@ -6,29 +6,26 @@ allows for custom words triggers for shocking such as `(word) (shock value) (dur
 
 <details>
   <summary>Shock Commands</summary>
-
-```python
-- setshocker <api-key> <device-code>
-- setusername <username>
-- add <word>
-- test <duration> <intensity>
-- remove_word <word>
-
-```
-
+  <pre><code>
+- setshocker &lt;api-key&gt; &lt;device-code&gt;
+- setusername &lt;username&gt;
+- add &lt;word&gt;
+- test &lt;duration&gt; &lt;intensity&gt;
+- remove_word &lt;word&gt;
+  </code></pre>
 </details>
+
 <details>
   <summary>Misc Commands</summary>
-```js
-- avatar <user/id>
-- banner <user/id>
-- status stream <status>/ playing <status>/ listening <status>/ watching<status >
+  <pre><code>
+- avatar &lt;user/id&gt;
+- banner &lt;user/id&gt;
+- status 
 - ping
 - shutdown
-
-````
-
+  </code></pre>
 </details>
+
 > ### ⚠️ **Warning:** Selfbots are against Discord's TOS but bans are likely unless you spam Discord's API or openly show it in public discord servers. I am not responsible for any issues/bans.
 
 ## Step 1: Clone the Repository
@@ -60,6 +57,8 @@ This will change the current directory to the `pishock-sb` folder, where the fil
 
    ```bash
    python -m venv venv
+   ```
+
 ````
 
 3. Activate the virtual environment:
@@ -139,3 +138,4 @@ and then you can run the selfbot using the following command:
 
 `python gui.py` - starts the gui for the selfbot
 configure everything in the gui or manually in the .env
+````
