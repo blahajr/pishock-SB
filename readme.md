@@ -91,7 +91,7 @@ To proceed, you will need the following credentials from [PiShock](https://pisho
 
 ### Getting Your Discord Token
 
-1. Open **Discord** in your web browser (preferably in **Developer Tools**).
+1. Open **Discord** in your web browser of choice
 2. Press **Ctrl + Shift + I**.
 
 3. Navigate to the **Console** tab.
@@ -111,6 +111,7 @@ To proceed, you will need the following credentials from [PiShock](https://pisho
      .find((m) => m?.exports?.default?.getToken !== void 0)
      .exports.default.getToken();
    ```
+- note: if this fails type "allow pasting" in the terminal
 
 ## Step 5: Start the selfbot
 
