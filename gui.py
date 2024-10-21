@@ -93,7 +93,7 @@ def save_settings() -> None:
             f.write(f"SHOCKER_APIKEY={api_key}\n")
             f.write(f"SHOCKER_USERNAME={username}\n")
             f.write(f"SHOCKER_CODE={shock_code}\n")
-            f.write(f"TOKEN={token}\n")
+            f.write(f"DISCORD_TOKEN={token}\n")
 
         whitelist_data = {
             "whitelist": [
@@ -166,7 +166,7 @@ def autofill_settings() -> None:
     api_key = os.getenv("SHOCKER_APIKEY")
     username = os.getenv("SHOCKER_USERNAME")
     shock_code = os.getenv("SHOCKER_CODE")
-    token = os.getenv("TOKEN")
+    token = os.getenv("DISCORD_TOKEN")
 
     whitelist_data = load_json("whitelist.json")
     wordlist_data = load_json("wordlist.json")
