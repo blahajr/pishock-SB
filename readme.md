@@ -79,13 +79,12 @@ This will change the current directory to the `pishock-sb` folder, where the fil
 ## Step 4: Get the Required API Key and Configurations
 
 To proceed, you will need the following credentials from [PiShock](https://pishock.com):
-
-1. **API Key**:
-   - The API Key is generated on the PiShock website and can be found in the **Account** section of your account dashboard.
-2. **Sharecode**:
-   - The Sharecode is a unique code generated on PiShock.com for your device.
-3. **Username**:
-   - The **Username** is the one you use to log into PiShock.com. You can find it in the **Account** section of your dashboard.
+| **setting** | **Description** |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Username** | The **Username** is the one you use to log into PiShock.com. You can find it in the **Account** section of your dashboard. |
+| **ApiKey** | The **API Key** is generated on the PiShock website and can be found in the **Account** section of your account dashboard. |
+| **Sharecode**| The **Sharecode** is a unique code generated on PiShock.com for your device. |
+| **Token** | Your **Discord Token** is required to log in to the SB. You can retrieve it by following the instructions from the web version of Discord. |
 
 ---
 
@@ -111,6 +110,7 @@ To proceed, you will need the following credentials from [PiShock](https://pisho
      .find((m) => m?.exports?.default?.getToken !== void 0)
      .exports.default.getToken();
    ```
+
 - note: if this fails type "allow pasting" in the terminal
 
 ## Step 5: Start the selfbot
