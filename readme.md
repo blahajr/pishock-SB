@@ -16,7 +16,7 @@ miscellaneous features:
 
 open your cmd/terminal of choice and run the following command
 
-`git clone https://github.com/blahjar/pi-sb`
+`git clone https://github.com/blahajr/pishock-sb.git`
 
 This will clone the repository to your machine.
 
@@ -24,9 +24,9 @@ This will clone the repository to your machine.
 
 Once the repo is cloned, navigate into the project folder:
 
-`cd pi-sb` or `mvdir
+`cd pishock-sb`
 
-This will change the current directory to the `pi-sb` folder, where the files are located.
+This will change the current directory to the `pishock-sb` folder, where the files are located.
 
 ## Step 3: Virtual Environment
 
