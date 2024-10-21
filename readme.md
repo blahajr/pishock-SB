@@ -4,12 +4,31 @@
 
 allows for custom words triggers for shocking such as `(word) (shock value) (duration)`
 
-miscellaneous features:
+<details>
+  <summary>Shock Commands</summary>
 
-- status <type> <status> (type: 1 - Game, 2 - Streaming, 3 - Listening, 4 - Watching) 
-- avatar <user/id> 
+```python
+- setshocker <api-key> <device-code>
+- setusername <username>
+- add <word>
+- test <duration> <intensity>
+- remove_word <word>
+
+```
+
+</details>
+<details>
+  <summary>Misc Commands</summary>
+```js
+- avatar <user/id>
 - banner <user/id>
+- status stream <status>/ playing <status>/ listening <status>/ watching<status >
+- ping
+- shutdown
 
+````
+
+</details>
 > ### ⚠️ **Warning:** Selfbots are against Discord's TOS but bans are likely unless you spam Discord's API or openly show it in public discord servers. I am not responsible for any issues/bans.
 
 ## Step 1: Clone the Repository
@@ -41,7 +60,7 @@ This will change the current directory to the `pishock-sb` folder, where the fil
 
    ```bash
    python -m venv venv
-   ```
+````
 
 3. Activate the virtual environment:
 

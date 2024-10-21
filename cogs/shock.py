@@ -122,10 +122,10 @@ class Shocker(commands.Cog):
     @commands.command()
     async def help1(self, ctx):
         await ctx.channel.send(
-            "```Commands:\n>ping\n>setshocker <Apikey> <Code>\n>setusername <username>\n>shocker\n>help\n>add_word <word>\n>remove_word <word>\n>status <type> <status> (type: 1 - Game, 2 - Streaming, 3 - Listening, 4 - Watching)\n>banner <user/id>\n>pfp <user/id>```"
+            "```Commands:\n>ping\n>setshocker <Apikey> <Code>\n>setusername <username>\n>shocker\n>help\n>add <word>\n>remove_word <word>\n>status <type> <status> (type: 1 - Game, 2 - Streaming, 3 - Listening, 4 - Watching)\n>banner <user/id>\n>pfp <user/id>```"
         )
 
-    @commands.command()
+    @commands.command(name="add")
     async def add_word(self, ctx, word: str):
         wordlist = self.load_json(self.WORDLIST_FILE) or {"words": []}
 
@@ -140,6 +140,8 @@ class Shocker(commands.Cog):
 
     @commands.command()
     async def remove_word(self, ctx, word: str):
+        """removes word from the custom list"""
+
         wordlist = self.load_json(self.WORDLIST_FILE) or {"words": []}
 
         if word not in wordlist["words"]:
@@ -153,6 +155,8 @@ class Shocker(commands.Cog):
 
     @commands.command()
     async def test(self, ctx, duration: int, intensity: int):
+        """test the shock"""
+
         await self.send_shock(ctx, duration, intensity)
 
     async def send_shock(self, ctx, duration: int, intensity: int) -> None:

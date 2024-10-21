@@ -1,3 +1,4 @@
+import time
 from main import Shock
 
 from discord.ext import commands
@@ -115,6 +116,19 @@ class Misc(commands.Cog):
                 await ctx.channel.send(user.avatar.url)
             else:
                 await ctx.channel.send("```Error: User does not have an avatar set.```")
+
+    @commands.command()
+    async def ping(self, ctx):
+        await ctx.message.delete()
+        before = time.monotonic()
+        message = await ctx.send("Pinging...")
+        ping = (time.monotonic() - before) * 1000
+        await message.edit(content=f"`{int(ping)} ms`")
+
+    @commands.command()
+    async def shutdown(self, ctx):
+        await ctx.send("Shutting down...")
+        await self.bot.close()
 
 
 async def setup(bot: Shock):
