@@ -1,4 +1,5 @@
 import time
+from typing import Optional
 from main import Shock
 
 from discord.ext import commands
@@ -60,24 +61,38 @@ class Misc(commands.Cog):
             )
 
     @commands.command()
-    async def banner(self, ctx, user: discord.User):
+    async def banner(self, ctx, user: Optional[discord.User] = None):
         """Displays a user's banner."""
-        if user.banner:
-            await ctx.channel.send(user.banner.url)
+        if not user:
+            user = ctx.author
+        if user is not None:
+            user = await self.bot.fetch_user(user.id)
+        else:
+            await ctx.channel.send("```Error: User not found.```")
+            return
+        if user.avatar is not None:
+            await ctx.channel.send(user.avatar.url)
         else:
             await ctx.channel.send("```Error: User does not have a banner set.```")
 
     @commands.command()
-    async def pfp(self, ctx, user: discord.User):
-        """Displays a user's profile picture."""
-        if user.avatar:
+    async def avatar(self, ctx, user: Optional[discord.User] = None):
+        """Displays a user's avatar."""
+        if not user:
+            user = ctx.author
+        if user is not None:
+            user = await self.bot.fetch_user(user.id)
+        else:
+            await ctx.channel.send("```Error: User not found.```")
+            return
+        if user.avatar is not None:
             await ctx.channel.send(user.avatar.url)
         else:
             await ctx.channel.send("```Error: User does not have an avatar set.```")
 
     @commands.command()
     async def ping(self, ctx):
-        """Measures bot latency."""
+        """shows the bot latency."""
         await ctx.message.delete()
         before = time.monotonic()
         message = await ctx.send("Pinging...")
