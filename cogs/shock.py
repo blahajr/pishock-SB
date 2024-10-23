@@ -48,31 +48,36 @@ class Shocker(commands.Cog):
             json.dump(data, f, indent=4)
 
     @commands.Cog.listener()
-    async def on_message(self, ctx):
+    async def on_message(self, message):
+        """handles the shocker custom messages"""
 
         data = self.load_json(self.WHITELIST_FILE)
         whitelist = data.get("whitelist", []) if data else []
-        print(whitelist)
-        if ctx.author.id not in whitelist or ctx.author == self.bot.user:
-            return print("You are not allowed to use this command.")
-
-        await self.shock_message(ctx)
-
-    async def shock_message(self, ctx):
-        parts = ctx.content.split()
-        wordlist = self.load_json(self.WORDLIST_FILE)
-
-        if wordlist and parts[0] not in wordlist.get("words", []):
+        if message.author.id not in whitelist:
             return
 
-        if len(parts) < 3:
+        wordlist = self.load_json(self.WORDLIST_FILE)
+        if not wordlist:
+            return
+
+        if any(word in message.content.lower() for word in wordlist.get("words", [])):
+            await self.shock_message(self, message)
+
+    async def shock_message(self, ctx, message: str):
+
+        wordlist = self.load_json(self.WORDLIST_FILE)
+
+        if wordlist and [0] not in wordlist.get("words", []):
+            return
+
+        if len(message) < 3:
             await ctx.channel.send(
                 "```Error: Invalid message format! Expected format: (word) (shock value) (duration) ex. shock 10 5```"
             )
             return
 
         try:
-            shock_value, duration = int(parts[1]), int(parts[2])
+            shock_value, duration = int(message[1]), int(message[2])
             if not (1 <= shock_value <= 100) or not (1 <= duration <= 15):
                 raise ValueError
 
@@ -97,7 +102,6 @@ class Shocker(commands.Cog):
     @commands.command(name="username")
     async def set_username(self, ctx, username: str):
         os.environ["SHOCKER_USERNAME"] = username
-
         with open(".env", "a") as f:
             f.write(f"SHOCKER_USERNAME={username}\n")
 
@@ -128,7 +132,6 @@ class Shocker(commands.Cog):
     @commands.command(name="add")
     async def add_word(self, ctx, word: str):
         wordlist = self.load_json(self.WORDLIST_FILE) or {"words": []}
-
         if word in wordlist["words"]:
             await ctx.channel.send(f"```Word `{word}` is already in the list.```")
             return

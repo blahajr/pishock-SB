@@ -10,31 +10,19 @@ class Misc(commands.Cog):
         self.bot = bot
 
     @commands.command(name="status")
-    async def set_status(self, ctx):
+    async def set_status(self, ctx, type: int, *, status: str):
         """Set your status."""
 
-        parts = ctx.content.split()
-        if len(parts) < 3:
+        if not status:
             await ctx.channel.send(
-                "```Error: Invalid format! Use: >set_status <type> <status>```"
+                "```Error: Status cannot be empty. Provide a valid status.```"
             )
             return
 
         try:
-            type = int(parts[1])
-            status = " ".join(parts[2:])
-
-            if not status:
-                await ctx.channel.send(
-                    "```Error: Status cannot be empty. Provide a valid status.```"
-                )
-                return
-
             if type == 1:
                 await self.bot.change_presence(activity=discord.Game(name=status))
-                await ctx.channel.send(
-                    f"```Status set successfully! to {status} and type game```"
-                )
+                await ctx.channel.send(f"```Status set to '{status}' (type: game).```")
             elif type == 2:
                 await self.bot.change_presence(
                     activity=discord.Streaming(
@@ -42,7 +30,7 @@ class Misc(commands.Cog):
                     )
                 )
                 await ctx.channel.send(
-                    f"```Status set successfully! to {status} and type streaming```"
+                    f"```Status set to '{status}' (type: streaming).```"
                 )
             elif type == 3:
                 await self.bot.change_presence(
@@ -51,7 +39,7 @@ class Misc(commands.Cog):
                     )
                 )
                 await ctx.channel.send(
-                    f"```Status set successfully! to {status} and type listening```"
+                    f"```Status set to '{status}' (type: listening).```"
                 )
             elif type == 4:
                 await self.bot.change_presence(
@@ -60,7 +48,7 @@ class Misc(commands.Cog):
                     )
                 )
                 await ctx.channel.send(
-                    f"```Status set successfully! to {status} and type watching```"
+                    f"```Status set to '{status}' (type: watching).```"
                 )
             else:
                 await ctx.channel.send(
@@ -72,53 +60,24 @@ class Misc(commands.Cog):
             )
 
     @commands.command()
-    async def banner(self, ctx):
+    async def banner(self, ctx, user: discord.User):
         """Displays a user's banner."""
-        parts = ctx.content.split()
-
-        if len(parts) < 2:
-            await ctx.channel.send(
-                "```Error: Please provide a valid user ID or mention.```"
-            )
-            return
-
-        user_id = parts[1]
-
-        if user_id.startswith("<@") and user_id.endswith(">"):
-            user_id = user_id[2:-1]
-
-            user = await self.bot.fetch_user(user_id)
-
-            if user.banner:
-                await ctx.channel.send(user.banner.url)
-            else:
-                await ctx.channel.send("```Error: User does not have a banner set.```")
+        if user.banner:
+            await ctx.channel.send(user.banner.url)
+        else:
+            await ctx.channel.send("```Error: User does not have a banner set.```")
 
     @commands.command()
-    async def pfp(self, ctx):
-        """Displays a user's pfp."""
-        parts = ctx.content.split()
-
-        if len(parts) < 2:
-            await ctx.channel.send(
-                "```Error: Please provide a valid user ID or mention.```"
-            )
-            return
-
-        user_id = parts[1]
-
-        if user_id.startswith("<@") and user_id.endswith(">"):
-            user_id = user_id[2:-1]
-
-            user = await self.bot.fetch_user(user_id)
-
-            if user.avatar:
-                await ctx.channel.send(user.avatar.url)
-            else:
-                await ctx.channel.send("```Error: User does not have an avatar set.```")
+    async def pfp(self, ctx, user: discord.User):
+        """Displays a user's profile picture."""
+        if user.avatar:
+            await ctx.channel.send(user.avatar.url)
+        else:
+            await ctx.channel.send("```Error: User does not have an avatar set.```")
 
     @commands.command()
     async def ping(self, ctx):
+        """Measures bot latency."""
         await ctx.message.delete()
         before = time.monotonic()
         message = await ctx.send("Pinging...")
@@ -127,6 +86,7 @@ class Misc(commands.Cog):
 
     @commands.command()
     async def shutdown(self, ctx):
+        """Shuts down the bot."""
         await ctx.send("Shutting down...")
         await self.bot.close()
 

@@ -136,7 +136,3 @@ and then you can run the selfbot using the following command:
 
 `python gui.py` - starts the gui for the selfbot
 configure everything in the gui or manually in the .env
-
-```
-
-```
