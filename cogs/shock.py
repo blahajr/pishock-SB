@@ -101,6 +101,7 @@ class Shocker(commands.Cog):
 
     @commands.command(name="username")
     async def set_username(self, ctx, username: str):
+        """sets your shocker username"""
         os.environ["SHOCKER_USERNAME"] = username
         with open(".env", "a") as f:
             f.write(f"SHOCKER_USERNAME={username}\n")
@@ -109,6 +110,7 @@ class Shocker(commands.Cog):
 
     @commands.command()
     async def shocker(self, ctx):
+        """displays the shocker configuration"""
         apikey = os.getenv("SHOCKER_APIKEY")
         code = os.getenv("SHOCKER_CODE")
         username = os.getenv("SHOCKER_USERNAME")
@@ -123,14 +125,9 @@ class Shocker(commands.Cog):
             f"```API Key: {apikey}\nCode: {code}\nUsername: {username}```"
         )
 
-    @commands.command()
-    async def help1(self, ctx):
-        await ctx.channel.send(
-            "```Commands:\n>ping\n>setshocker <Apikey> <Code>\n>setusername <username>\n>shocker\n>help\n>add <word>\n>remove_word <word>\n>status <type> <status> (type: 1 - Game, 2 - Streaming, 3 - Listening, 4 - Watching)\n>banner <user/id>\n>pfp <user/id>```"
-        )
-
     @commands.command(name="add")
     async def add_word(self, ctx, word: str):
+        """adds word to the custom shock words"""
         wordlist = self.load_json(self.WORDLIST_FILE) or {"words": []}
         if word in wordlist["words"]:
             await ctx.channel.send(f"```Word `{word}` is already in the list.```")
@@ -158,7 +155,7 @@ class Shocker(commands.Cog):
 
     @commands.command()
     async def test(self, ctx, duration: int, intensity: int):
-        """test the shock"""
+        """sends a test shock"""
 
         await self.send_shock(ctx, duration, intensity)
 
